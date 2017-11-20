@@ -1,0 +1,55 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    >
+ 
+<h:head>
+ 	<script type="text/javascript">
+  					function submitPage() {    					   
+    					document.getElementById("loginForm").submit();
+  					} 
+  					function submitRegForm() {    					   
+    					document.getElementById("regForm").submit();
+  					} 
+		</script>
+</h:head>
+ 
+<h:body>     
+	<div align="center">
+		
+		${message} 
+		
+		<form id="loginForm" method="POST" action="/WebWallet/regUser/account" >			
+		
+			<h:outputLabel value="Login" style="font-size:200%;" />
+			<h:panelGrid columns="2" cellpadding="5">
+	            <h:outputLabel for="username" value="Username:" />
+            	<p:inputText id="username"  required="true" label="username" />
+ 
+            	<h:outputLabel for="password" value="Password:" />
+            	<p:password id="password"  required="true" label="password" />
+	 
+	            <f:facet name="footer">
+	                <p:commandButton value="Submit" onclick="submitPage()" />
+	                <p:spacer width="50" height="10"></p:spacer>
+	                <p:commandButton value="Registration" onclick="submitRegForm()"/>
+	            </f:facet>  
+	            
+	            
+        	</h:panelGrid>
+		</form>	
+		
+		<form id="regForm" method="GET" action="/WebWallet/Registration" >
+		</form>
+		
+	</div>	   
+</h:body>
+     
+</html>

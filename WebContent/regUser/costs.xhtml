@@ -1,0 +1,127 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    >
+ 
+<h:head>
+	<script type="text/javascript">  		
+	function submitAddRow() { 
+		document.getElementById("AddRowForm").submit();
+	}
+	function submitDateFilter() { 
+		document.getElementById("dateFilter").submit();
+	}
+	function submitLogout() { 
+		document.getElementById("logoutForm").submit();
+	}
+	</script>
+</h:head> 
+<h:body>
+	
+	<div align="center">
+		<p:outputLabel value="Costs page" />
+		<p><p:outputLabel value="Hello, " /><p:outputLabel value="${username}!"  style="font-weight: bold"/></p>	
+		<p:outputLabel value="#{dbMessage}" />
+	</div>	
+				
+	<div align="center">
+		<form id="AddRowForm" method="POST" action="AddCost" >
+	        <p:dataTable var="1" value="1">    
+				<p:column headerText="Type" >	
+					<p:selectOneMenu id="type">
+        				<f:selectItem itemLabel="Incomes" itemValue="incomes" />
+        				<f:selectItem itemLabel="Outcomes" itemValue="outcomes" />        
+    				</p:selectOneMenu>		               				
+				</p:column>
+				<p:column headerText="Sum">
+					<p:inputText id="sum" required="true"/>	 						
+				</p:column>
+				<p:column headerText="Date">
+					<p:calendar id="date" pattern="yyyy-MM-dd" mask="true" required="true"/>	 						
+				</p:column>
+				<p:column headerText="Category">
+					<p:selectOneMenu id="category">
+						<f:selectItem itemLabel="" itemValue="" />
+        				<f:selectItem itemLabel="Salary" itemValue="salary" />
+        				<f:selectItem itemLabel="Food" itemValue="food" />
+        				<f:selectItem itemLabel="Clothes" itemValue="clothes" />
+        				<f:selectItem itemLabel="Trips" itemValue="trips" />
+        				<f:selectItem itemLabel="Vacation" itemValue="vacation" />
+        				<f:selectItem itemLabel="Transport" itemValue="transport" />
+        				<f:selectItem itemLabel="Birthday" itemValue="birthday" />
+        				<f:selectItem itemLabel="Gift" itemValue="gift" />        				        
+    				</p:selectOneMenu>		 						
+				</p:column>
+				<p:column headerText="Description">
+					<p:inputText id="description" required="true"/>	 						
+				</p:column>	
+				<p:column headerText="">
+					 <p:commandButton value="Add cost" onclick="submitAddRow()" />	 						
+				</p:column>		
+			</p:dataTable>   
+		</form>	
+		
+	</div>	   
+     
+    <p:spacer width="100" height="50"></p:spacer>
+    
+    <div align="center">		
+		<p:outputLabel value="#{dateFilterMessage}" />
+	</div>
+    
+    <div align="center">
+    	<form id="dateFilter" method="POST" action="dateFilter" >
+    		<p:outputLabel value="Show costs from" /> <p:spacer width="20" height="10"></p:spacer> <p:calendar id="fromDate" pattern="yyyy-MM-dd" mask="true" required="true"/><p:spacer width="20" height="10"></p:spacer> <p:outputLabel value="to" /><p:spacer width="20" height="10"></p:spacer> <p:calendar id="toDate" pattern="yyyy-MM-dd" mask="true" required="true"/>
+    		<p:spacer width="40" height="10"></p:spacer>
+    		<p:commandButton value="Apply filter" onclick="submitDateFilter()" />	
+    	</form>
+    </div>
+    
+    <p:spacer width="100" height="50"></p:spacer>
+    
+    <div align="center">		
+		<p:outputLabel value="#{Message}" />
+	</div>	    
+     
+	<p:dataTable var="cost" value="#{costs}" scrollable="true" scrollHeight="400" >
+          		         		
+          		
+          		<f:facet name="header">
+            		Costs
+       			</f:facet>
+          		
+				<p:column headerText="Type" footerText="Type">	
+					<h:outputText value="#{cost.type}" />		               				
+				</p:column>
+				<p:column headerText="Sum" footerText="Sum">
+					<h:outputText value="#{cost.sum}" />	 						
+				</p:column>
+				<p:column headerText="Date" footerText="Date">
+					<h:outputText value="#{cost.date}" />	 						
+				</p:column>
+				<p:column headerText="Category" footerText="Category">
+					<h:outputText value="#{cost.category}" />	 						
+				</p:column>
+				<p:column headerText="Description" footerText="Description">
+					<h:outputText value="#{cost.description}" />	 						
+				</p:column>													
+						
+			</p:dataTable>       
+         
+    <p:spacer width="100" height="50"></p:spacer>
+	<div align="center">
+		<form id="logoutForm" method="GET" action="account?action=logout" >
+			<p:commandButton value="Logout" onclick="submitLogout()" />	
+		</form>
+	</div>
+	<p:spacer width="100" height="50"></p:spacer>
+		
+</h:body>  
+</html>
